@@ -356,7 +356,53 @@ body {
   color: var(--text-muted);
   margin-top: 2px;
   padding-left: 4px;
-}</style>
+}
+/* 定价表格 */
+.price-table {
+  margin: 12px 12px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.pt-head {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 1.3fr 1fr 1fr;
+  background: var(--bg-card);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.pth {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+.pth:first-child { text-align: left; }
+.pth:last-child { text-align: right; }
+.pt-row {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 1.3fr 1fr 1fr;
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  align-items: center;
+}
+.pt-row:last-child { border-bottom: none; }
+.pt-row-h { background: rgba(79,70,229,0.15); }
+.ptd {
+  font-size: 12px;
+  color: var(--text-main);
+  text-align: center;
+}
+.ptd:first-child { text-align: left; font-weight: 500; }
+.ptd:last-child { text-align: right; font-weight: 600; color: var(--primary-light); }
+.pt-row-h .ptd:last-child { color: var(--primary-light); }
+.save {
+  font-size: 10px;
+  color: #34d399;
+  margin-left: 4px;
+}
+</style>
 </head>
 <body>
 
@@ -412,16 +458,48 @@ body {
 
   <div class="pricing">
     <div class="pricing-t">阶梯定价</div>
-    <div class="pr"><div class="pr-p">1个月</div><div class="pr-v">¥8,888</div><div class="pr-d">账号1 · 深度分析100次/账号/月 · 常规问答200次/月</div></div>
-    <div class="pr"><div class="pr-p">3个月</div><div class="pr-v">¥21,888</div><div class="pr-l">省17%</div><div class="pr-d">账号1 · 深度分析150次/账号/月 · 常规问答300次/月</div></div>
-    <div class="pr"><div class="pr-p">6个月</div><div class="pr-v">¥36,888</div><div class="pr-l">省18%</div><div class="pr-d">账号2 · 深度分析200次/账号/月 · 常规问答500次/月</div></div>
-    <div class="pr"><div class="pr-p">12个月</div><div class="pr-v h">¥49,888</div><div class="pr-d">账号4 · 深度分析300次/账号/月 · 常规问答不限量</div></div>
+    <div class="price-table">
+      <div class="pt-head">
+        <div class="pth">时长</div>
+        <div class="pth">账号</div>
+        <div class="pth">深度分析/月</div>
+        <div class="pth">常规问答/月</div>
+        <div class="pth">金额</div>
+      </div>
+      <div class="pt-row">
+        <div class="ptd">1个月</div>
+        <div class="ptd">1</div>
+        <div class="ptd">100次/账号</div>
+        <div class="ptd">200次</div>
+        <div class="ptd">¥8,888</div>
+      </div>
+      <div class="pt-row">
+        <div class="ptd">3个月</div>
+        <div class="ptd">1</div>
+        <div class="ptd">150次/账号</div>
+        <div class="ptd">300次</div>
+        <div class="ptd">¥21,888 <span class="save">省17%</span></div>
+      </div>
+      <div class="pt-row">
+        <div class="ptd">6个月</div>
+        <div class="ptd">2</div>
+        <div class="ptd">200次/账号</div>
+        <div class="ptd">500次</div>
+        <div class="ptd">¥36,888 <span class="save">省18%</span></div>
+      </div>
+      <div class="pt-row pt-row-h">
+        <div class="ptd">12个月</div>
+        <div class="ptd">4</div>
+        <div class="ptd">300次/账号</div>
+        <div class="ptd">不限量</div>
+        <div class="ptd">¥49,888</div>
+      </div>
+    </div>
     <div class="pricing-n">
       支持增加账号、追加次数<br>
       数据治理与本地化部署单独计费
     </div>
   </div>
-
   <div class="page-footer-brand">兴路车联 · 大卡鹰眼</div>
 
   <!-- 分隔线 -->
