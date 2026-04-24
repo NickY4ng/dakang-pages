@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>大卡鹰眼 · 物流智能数据分析平台</title>
+<style>
+:root {
+  --primary: #3B82F6;
+  --primary-light: #60A5FA;
+  --accent: #06B6D4;
+  --bg-dark: #03080F;
+  --bg-card: #0B1420;
+  --text-main: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border: #1A2540;
+  --page-gap: 6px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  min-width: 390px;
+}
+
+.page-wrapper {
+  width: 390px;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ── 页面分隔 ── */
+.page-divider {
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  margin: 0;
+}
+
+.page-gap-block {
+  height: var(--page-gap);
+  background: var(--bg-dark);
+}
+
+/* ── 顶部导航 ── */
+.topbar {
+  padding: 14px 20px;
+  background: rgba(3,8,15,0.95);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.topbar-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 1px;
+}
+
+.topbar-badge {
+  font-size: 10px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.2);
+  color: var(--primary-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 28px 20px 20px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.18);
+  color: var(--primary-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.hero-title .b { color: var(--primary-light); }
+.hero-title .c { color: var(--accent); }
+
+.hero-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.s-item { text-align: center; }
+.s-n { font-size: 20px; font-weight: 800; color: #fff; }
+.s-l { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+.s-d { width: 1px; height: 30px; background: var(--border); align-self: center; }
+
+/* ── 功能 ── */
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 20px;
+  margin-bottom: 8px;
+}
+
+.feats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 20px;
+  margin-bottom: 14px;
+}
+
+.feat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 10px;
+}
+
+.feat-t { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.feat-d { font-size: 10px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── 定价 ── */
+.pricing {
+  margin: 0 20px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.pricing-t { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+
+.pr {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.pr:last-of-type { border-bottom: none; }
+
+.pr-p { flex: 0 0 50px; font-size: 11px; color: var(--text-muted); }
+.pr-v { flex: 1; font-size: 14px; font-weight: 700; color: #fff; }
+.pr-v.h { color: var(--primary-light); }
+.pr-l { font-size: 9px; background: rgba(59,130,246,0.1); color: var(--primary-light); padding: 2px 6px; border-radius: 6px; }
+
+.pricing-n {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.page-footer-brand {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255,255,255,0.12);
+  padding: 12px 0;
+  letter-spacing: 1px;
+}
+
+/* ── 区块标题 ── */
+.block-header {
+  padding: 14px 20px;
+  background: rgba(3,8,15,0.95);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.block-title { font-size: 15px; font-weight: 700; color: #fff; }
+.block-sub { font-size: 10px; color: var(--text-muted); display: block; margin-top: 1px; }
+
+/* ── 截图区 ── */
+.screenshot-wrap {
+  margin: 12px 12px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.screenshot-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 12px 0;
+}
+
+.chart-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.chart-card img {
+  width: 100%;
+  display: block;
+}
+
+/* ── 能力列表 ── */
+.cap-box {
+  margin: 10px 12px 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.cap-t { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+
+.cap-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.cap-item:last-child { margin-bottom: 0; }
+
+.cap-dot {
+  width: 4px; height: 4px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* ── 数据亮点 ── */
+.hl-box {
+  margin: 10px 12px 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.hl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.hl-item {
+  background: var(--bg-dark);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.hl-n { font-size: 16px; font-weight: 800; color: #fff; }
+.hl-l { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+
+/* ── 标签 ── */
+.asset-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.asset-tag { font-size: 10px; background: rgba(59,130,246,0.1); color: var(--primary-light); padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(59,130,246,0.15); }
+
+.asset-list { display: flex; flex-direction: column; gap: 5px; }
+.asset-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text-muted); }
+.asset-item::before { content: '✓'; color: #10B981; font-size: 10px; font-weight: 700; }
+
+.connect-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 7px;
+}
+.connect-item:last-child { margin-bottom: 0; }
+.connect-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+
+/* ── 底部 ── */
+.footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 16px 14px;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.footer-t { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.footer-s { font-size: 10px; color: var(--text-muted); line-height: 1.6; }
+
+/* ── 价值区块 ── */
+.value-box {
+  margin: 10px 12px 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.value-t { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 7px;
+}
+.value-item:last-child { margin-bottom: 0; }
+.value-dot { width: 4px; height: 4px; background: #10B981; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ══════ 第1页：总览 ══════ -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-name">大卡鹰眼</div>
+      <span class="topbar-sub">兴路车联 · 物流数据智能分析</span>
+    </div>
+    <div class="topbar-badge">AI驱动</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-badge">公路货运物流行业</div>
+    <h1 class="hero-title">
+      货运数据智能分析<br>
+      <span class="b">说话</span> 即得 <span class="c">报告</span>
+    </h1>
+    <p class="hero-sub">
+      基于730万重卡数据<br>
+      AI秒级生成分析报告，告别Excel
+    </p>
+    <div class="hero-stats">
+      <div class="s-item"><div class="s-n">730万+</div><div class="s-l">重卡车辆</div></div>
+      <div class="s-d"></div>
+      <div class="s-item"><div class="s-n">百亿级</div><div class="s-l">运单数据</div></div>
+      <div class="s-d"></div>
+      <div class="s-item"><div class="s-n">秒级</div><div class="s-l">即时响应</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">核心功能</div>
+  <div class="feats">
+    <div class="feat">
+      <div class="feat-t">智能报表</div>
+      <div class="feat-d">自然语言提问，秒级返回多维分析报告，含图表和结论</div>
+    </div>
+    <div class="feat">
+      <div class="feat-t">数据融合</div>
+      <div class="feat-d">接入TMS/ERP，打通企业内部数据孤岛</div>
+    </div>
+    <div class="feat">
+      <div class="feat-t">AI行业分析师</div>
+      <div class="feat-d">物流专属大模型驱动，懂行业、懂数据、懂分析</div>
+    </div>
+    <div class="feat">
+      <div class="feat-t">业务系统接入</div>
+      <div class="feat-d">标准化接口，一站式对接企业各业务系统数据</div>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <div class="pricing-t">阶梯定价</div>
+    <div class="pr"><div class="pr-p">1个月</div><div class="pr-v">¥8,888</div><div></div></div>
+    <div class="pr"><div class="pr-p">3个月</div><div class="pr-v">¥21,888</div><div class="pr-l">省17%</div></div>
+    <div class="pr"><div class="pr-p">6个月</div><div class="pr-v">¥36,888</div><div class="pr-l">省18%</div></div>
+    <div class="pr"><div class="pr-p">12个月</div><div class="pr-v h">¥49,998</div><div></div></div>
+    <div class="pricing-n">
+      每账号每月100次深度分析 · 常规问答不限量<br>
+      支持增加账号、追加次数
+    </div>
+  </div>
+
+  <div class="page-footer-brand">兴路车联 · 大卡鹰眼</div>
+
+  <!-- 分隔线 -->
+  <div class="page-divider"></div>
+
+  <!-- ══════ 第2页：智能报表 ══════ -->
+  <div class="block-header">
+    <div>
+      <div class="block-title">智能报表</div>
+      <span class="block-sub">自然语言 × 秒级响应 × 多维分析</span>
+    </div>
+  </div>
+
+  <div class="screenshot-wrap">
+    <img src="images/img_0_jpg" alt="智能报表">
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-card">
+      <img src="images/img_1_jpg" alt="趋势图">
+    </div>
+    <div class="chart-card">
+      <img src="images/img_2_jpg" alt="增长图">
+    </div>
+  </div>
+
+  <div class="cap-box">
+    <div class="cap-t">能做什么</div>
+    <div class="cap-item"><div class="cap-dot"></div>自然语言交互，会说话就能查数据，无需SQL</div>
+    <div class="cap-item"><div class="cap-dot"></div>秒级生成多维度分析报告，含图表+分析结论</div>
+    <div class="cap-item"><div class="cap-dot"></div>匹配行业分析模板和成功案例</div>
+    <div class="cap-item"><div class="cap-dot"></div>数据精准查询 + 行业专家咨询，二合一</div>
+    <div class="cap-item"><div class="cap-dot"></div>报告一键分享，全员可看，告别Excel来回传</div>
+  </div>
+
+  <div class="hl-box">
+    <div class="hl-grid">
+      <div class="hl-item"><div class="hl-n">730万+</div><div class="hl-l">重卡车辆</div></div>
+      <div class="hl-item"><div class="hl-n">百亿级</div><div class="hl-l">运单数据</div></div>
+      <div class="hl-item"><div class="hl-n">0门槛</div><div class="hl-l">会说话就能用</div></div>
+      <div class="hl-item"><div class="hl-n">秒级</div><div class="hl-l">即时响应</div></div>
+    </div>
+  </div>
+
+  <div class="value-box">
+    <div class="value-t">客户价值</div>
+    <div class="value-item"><div class="value-dot"></div>极大地提升报告生产效率，降低人力投入</div>
+    <div class="value-item"><div class="value-dot"></div>快速生成报告，结合客户数据，助力快速决策</div>
+  </div>
+
+  <div class="page-gap-block"></div>
+
+  <!-- 分隔线 -->
+  <div class="page-divider"></div>
+
+  <!-- ══════ 第3页：数据资产 ══════ -->
+  <div class="block-header">
+    <div>
+      <div class="block-title">数据资产</div>
+      <span class="block-sub">融合管理 · 安全可控 · 资产增值</span>
+    </div>
+  </div>
+
+  <div class="screenshot-wrap">
+    <img src="images/img_3_jpg" alt="数据资产">
+  </div>
+
+  <div class="cap-box">
+    <div class="cap-t">数据融合三大来源</div>
+    <div class="asset-tags">
+      <div class="asset-tag">兴路车联数据</div>
+      <div class="asset-tag">用户上传数据</div>
+      <div class="asset-tag">客户业务系统数据</div>
+    </div>
+    <div class="asset-list">
+      <div class="asset-item">可接入客户TMS/ERP等业务系统</div>
+      <div class="asset-item">统一管理、安全存储、权限可控</div>
+      <div class="asset-item">支持本地化部署</div>
+    </div>
+  </div>
+
+  <div class="cap-box" style="margin-top:8px;">
+    <div class="cap-t">业务系统接入能力</div>
+    <div class="connect-item"><div class="connect-dot"></div>依赖大卡数字人，通过标准化接口对接企业各业务系统数据</div>
+    <div class="connect-item"><div class="connect-dot"></div>提供标准化数据治理流程，一次治理，长期有效</div>
+    <div class="connect-item"><div class="connect-dot"></div>实时同步更新，数据始终保持最新</div>
+    <div class="connect-item"><div class="connect-dot"></div>数据融合后，统一进行AI分析与报表输出</div>
+  </div>
+
+  <div class="value-box">
+    <div class="value-t">客户价值</div>
+    <div class="value-item"><div class="value-dot"></div>极大地提升报告生产效率，降低人力投入</div>
+    <div class="value-item"><div class="value-dot"></div>快速生成报告，结合客户数据，助力快速决策</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-t">告别数据孤岛，让数据资产真正用起来</div>
+    <div class="footer-s">一站式数据治理 · 报表自动生成 · 分析对话即得</div>
+  </div>
+
+  <div class="page-footer-brand">兴路车联 · 大卡鹰眼</div>
+
+</div>
+
+</body>
+</html>
